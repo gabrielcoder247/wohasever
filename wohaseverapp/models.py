@@ -166,6 +166,14 @@ class Likes(models.Model):
     user = models.OneToOneField(User,related_name='user_likes')
     likes = models.IntegerField()
 
+class Disikes(models.Model):
+    user = models.OneToOneField(User,related_name='user_dislikes')
+    dislikes = models.IntegerField()    
+
 class Followers(models.Model):
-    user = models.CharField(max_length=20, default="")
+    user = models.OneToOneField(User,related_name='user_followers')
     follower = models.CharField(max_length=20, default="")
+
+class Followings(models.Model):
+    user = models.OneToOneField(User,related_name='user_followings')
+    following = models.CharField(max_length=20, default="")    
