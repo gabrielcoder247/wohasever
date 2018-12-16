@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.shortcuts import render,redirect, get_object_or_404
+from django.http  import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
+from django.urls import reverse
 
 # Create your views here.
 
@@ -43,11 +46,12 @@ def home(request):
     if request.method == 'POST':
         question_form = QuestionForm(request.POST,request.FILES,instance=request.user)
         answer_form = AnswerForm(request.POST,request.FILES,instance=request.user)
-        
+
         if question_form.is_valid or answer_form.is_valid:
             question_form.save()
-            answer_form.save() 
+            answer_form.save()
 
+            return HttpResponseRedirect(reverse('home') )
     # elif request.method == 'POST':
     #     answer_form = AnswerForm(request.POST,request.FILES,instance=request.user)
     #     if answer_form.is_valid:
@@ -57,7 +61,7 @@ def home(request):
             question_form = ProfileForm()
             answer_form = ProfileForm()
 
-            # return render(request, 'profile.html', {"image_form": image_form,"biz":biz,"profile":profile,"neighbour":neighbour,"pr":pr})
+            
     return render(request, 'home.html', {"question_form": question_form,"answer_form": answer_form,
                                         'title':title, 'current_user':current_user,'question':question,'answer':answer})
   
