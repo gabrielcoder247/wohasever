@@ -69,3 +69,103 @@ class Profile(models.Model):
 
   
 
+
+class Question(models.Model):
+    title = models.CharField(max_length=100)
+    your_question = models.TextField(max_length=300)
+    pub_date = models.DateField(auto_now_add=True)
+    image_path = models.ImageField(upload_to = 'images/')
+    # image_likes = models.ManyToManyField(User, related_name='image_likes', blank=True)
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
+  
+
+
+    @classmethod
+    def get_all(cls):
+        question = cls.objects.all()
+        return question
+
+
+    def save_question(self):
+        self.save()
+
+
+    def delete_question(self):
+        self.delete()   
+        
+    @classmethod
+    def search_question(cls, search_term):
+        question = cls.objects.filter(title__icontains = search_term)
+        return question
+                
+        
+
+    class meta:
+        ordering = ['-pub_date'] 
+
+
+
+    def __str__(self):
+        return self.title
+
+
+class Answer(models.Model):
+    title = models.CharField(max_length=100)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='user_answer')
+    # image=models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments')
+    profile=models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='answer')
+    your_answer = models.TextField(max_length=300,null=True)
+
+
+    def get_Answer(self,id):
+        answer= Answer.objects.filter(answer_id=id)
+        return answer
+        
+    def save_answer(self):
+        self.save()  
+
+    @classmethod
+    def search_answer(cls, search_term):
+        answer = cls.objects.filter(title__icontains = search_term)
+        return answer
+                      
+
+    def __str__(self):
+        return self.title
+    
+
+
+
+
+class Explore(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='user')
+    # image=models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments')
+    profile=models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='profile')
+    Category = models.CharField(max_length=50,null=True)
+    search_category = models.CharField(max_length=50,null=True)
+    created = models.DateField(auto_now_add=True)
+
+
+    def get_category(self,id):
+        category= Explore.objects.filter(category_id=id)
+        return category
+        
+    def save_category(self):
+        self.save()  
+
+    @classmethod
+    def search_category(cls, search_term):
+        category = cls.objects.filter(category__icontains = search_term)
+        return category
+                      
+
+    def __str__(self):
+        return self.category
+
+class Likes(models.Model):
+    user = models.OneToOneField(User,related_name='user_likes')
+    likes = models.IntegerField()
+
+class Followers(models.Model):
+    user = models.CharField(max_length=20, default="")
+    follower = models.CharField(max_length=20, default="")
