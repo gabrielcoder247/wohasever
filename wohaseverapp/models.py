@@ -73,9 +73,9 @@ class Profile(models.Model):
 class Question(models.Model):
     title = models.CharField(max_length=100)
     your_question = models.TextField(max_length=300)
-    pub_date = models.DateField(auto_now_add=True)
+    pub_date = models.DateField(auto_now_add=False)
     image_path = models.ImageField(upload_to = 'images/')
-    # image_likes = models.ManyToManyField(User, related_name='image_likes', blank=True)
+    user = models.ForeignKey(User, related_name='user_question', blank=True)
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
   
 
