@@ -28,3 +28,26 @@ class QuestionForm(forms.ModelForm):
 		model = Question
         # exclude = ['user','location'],
 		fields = ['title', 'your_question', 'image_path','pub_date']
+
+
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        exclude = ['user','profile']
+
+
+# class NewBusinessForm(forms.ModelForm):
+#     class Meta:
+#         model = Business
+#         exclude = ['user','profile']        
+        
+
+# class CommentForm(forms.ModelForm):
+#     class Meta:
+#         model = Comments
+#         fields = ('post',)
+#         exclude = ['user']
+
+        		
+
