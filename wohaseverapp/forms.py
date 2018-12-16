@@ -15,14 +15,14 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'name', 'email',
                   'password1', 'password2')
 
-# Create a profile form fields
+# Create a profile update form fields
 class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['user','followers','following'] 
      
      
-# Create a image form fields
+# Create a question form fields
 class QuestionForm(forms.ModelForm):
 	class Meta:
 		model = Question
@@ -30,7 +30,7 @@ class QuestionForm(forms.ModelForm):
 		fields = ['title', 'your_question', 'image_path','pub_date']
 
 
-
+# Create a answer form fields
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
