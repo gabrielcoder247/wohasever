@@ -37,8 +37,8 @@ def signup(request):
 
 
 def home(request):
-
     title = Home
+
     current_user = request.user
     question = Question.objects.filter(user=request.user) 
     answer = Answer.objects.filter(user=request.user) 
@@ -58,8 +58,8 @@ def home(request):
     #         answer_form.save() 
 
         else:
-            question_form = ProfileForm()
-            answer_form = ProfileForm()
+            question_form = QuestionForm()
+            answer_form = AnswerForm()
 
             
     return render(request, 'home.html', {"question_form": question_form,"answer_form": answer_form,
