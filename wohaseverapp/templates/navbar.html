@@ -6,16 +6,16 @@
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 </head>
 <body>
-  <nav class="navbar navbar-inverse navbar-light bg-light navbar-fixed-top">
+  <nav class="navbar navbar-inverse navbar-light bg-light navbar-fixed-top ">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="{% url 'home_page' %}" style="font-family: 'Grand Hotel', cursive; color:blue;font-size:30px;">Instagram</a>
+        <a class="navbar-brand" href="{% url 'home' %}" style="font-family: 'Grand Hotel', cursive; color:blue;font-size:30px;">Wohasever</a>
       </div>
 
       <!-- Adding a search form  -->
       <div class="col-sm-4 col-md-4 navbar-right ">
 
-        <form class="navbar-form" role="search" action="{% url 'search_results' %}">
+        <form class="navbar-form" role="search" action="">
 
           <div class="input-group">
             <input type="text" class="form-control mr-sm-3" placeholder="Search Article" name="username">
@@ -37,7 +37,7 @@
             </a>
       <ul class="dropdown-menu" role="menu">
         <li style="font-family: 'Oswald', sans-serif;">
-          <a href="{%url ''%}">Home</a>
+          <a href="">Home</a>
         </li>
         <li style="font-family: 'Oswald', sans-serif;">
             <a href="">Upload</a>

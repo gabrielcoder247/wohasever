@@ -14,17 +14,25 @@
        <strong> <h1> Welcome to Wohasever</h1></strong>
         <p>have you ever been a decision making delima, that you are confused and indecisive 
             or you most probably want to meet people wohasever been in the situation or has experience 
-            of that problem to mentor you <strong>Wohasever for born for this to solve that problem by connectig to 
+            of that problem to mentor you <strong>Wohasever </strong> for born for this to solve that problem by connectig to 
                 a willing mentor allover the world to give you first mentorship
-            </strong>
+           
         </p>
       <!-- <div class="phones_image">
         <img class=" phone img-responsive"src="{% static "images/insta.png" %}" alt="">
       </div> -->
     </div>
 </div>
-<div class="row mt-4">
+     <div class="row mt-4">
     <div class="col-xs-4 col-sm-4 col-md-6 col-lg-6 Reg_panel text-center">
+
+        <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
       <div class="panel panel-default">
         <div class="panel-heading mt-2">
           <h3 class="text-center">Sign Up Here</h3>
@@ -55,6 +63,31 @@
 
       </div>
     </div>
-  
+    <!-- empty div -->
+    <!-- <div class="col-md-2"></div> -->
   </div>
+<!-- </div>
+</div> -->
+<script>
+        $(document).ready(function(){
+            $("#myBtn").click(function(){
+                $("#myModal").modal();
+            });
+        });
+        </script>
+        <style>
+                .modal-header, h4, .close {
+                    background-color: #5cb85c;
+                    color:white !important;
+                    text-align: center;
+                    font-size: 30px;
+                }
+                .modal-footer {
+                    background-color: #f9f9f9;
+                }
+                </style>
+        
 {% endblock %}
+
+ 
+

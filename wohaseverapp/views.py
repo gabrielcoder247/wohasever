@@ -14,7 +14,7 @@ from django.urls import reverse
 
 
 def signup(request):
-    title = signup
+    title = "signup"
     
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
@@ -37,31 +37,51 @@ def signup(request):
 
 
 def home(request):
-    title = Home
+    title = "Home"
 
     current_user = request.user
     question = Question.objects.filter(user=request.user) 
-    answer = Answer.objects.filter(user=request.user) 
+    answer = Answer.objects.filter(user=request.user)
 
     if request.method == 'POST':
-        question_form = QuestionForm(request.POST,request.FILES,instance=request.user)
-        answer_form = AnswerForm(request.POST,request.FILES,instance=request.user)
+        if 'question' in request.POST:
+            question_form = QuestionForm(request.POST,request.FILES,instance=request.user, prefix='questioned')
+            if question_form.is_valid:
+                question_form.save()
+            question_form = QuestionForm(prefix='questioned')
 
-        if question_form.is_valid or answer_form.is_valid:
-            question_form.save()
-            answer_form.save()
+        elif 'answer' in request.POST:
+            answer_form = AnswerForm(request.POST,request.FILES,instance=request.user, prefix='answered')
+            if answer_form.is_valid:
+                answer_form.save()
 
-            return HttpResponseRedirect(reverse('home') )
-    # elif request.method == 'POST':
+    else:
+            question_form = QuestionForm(prefix='questioned')
+            answer_form = AnswerForm('answered')
+            
+
+       
+
+
+    
+
+    # if request.method == 'POST':
+    #     question_form = QuestionForm(request.POST,request.FILES,instance=request.user)
     #     answer_form = AnswerForm(request.POST,request.FILES,instance=request.user)
-    #     if answer_form.is_valid:
-    #         answer_form.save() 
+       
 
-        else:
-            question_form = QuestionForm()
-            answer_form = AnswerForm()
+    #     if question_form.is_valid or answer_form.is_valid:
+    #         question_form.save()
+    #         answer_form.save()
+
+    #         return HttpResponseRedirect(reverse_lazy('home') )
+   
+
+    #     else:
+    #         question_form = QuestionForm()
+    #         answer_form = AnswerForm()
 
             
     return render(request, 'home.html', {"question_form": question_form,"answer_form": answer_form,
-                                        'title':title, 'current_user':current_user,'question':question,'answer':answer})
+                                        "title":title, "current_user":current_user,"question":question,"answer":answer})
   
