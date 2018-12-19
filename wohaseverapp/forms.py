@@ -27,7 +27,7 @@ class QuestionForm(forms.ModelForm):
 	class Meta:
 		model = Question
         # exclude = ['user','location'],
-		fields = ['title', 'your_question', 'image_path','pub_date']
+		fields = ['question_title', 'your_question', 'image_path','pub_date']
 
 
 # Create a answer form fields

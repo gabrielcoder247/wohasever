@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import *
 from .forms import *
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.shortcuts import render,redirect, get_object_or_404
@@ -78,4 +79,43 @@ def home(request):
             
     return render(request, 'home.html', {"question_form": question_form,"answer_form": answer_form,
                                         "title":title, "current_user":current_user,"question":question,"answer":answer})
+
+
+
+
+@login_required(login_url='/accounts/login/')
+def search_results(request): 
+
+    #query all username to find search_term  
+    if 'question_title' in request.GET and request.GET["question_title"]:
+        search_term =request.GET.get("question_title")
+        search_title = Question.search_question(search_term)
+        message = f"{search_term}"
+
+        return render(request,'search.html',{"message":message, "searched":search_title})
+
+    else:
+
+        message = "You haven't searched for any term"
+        return render(request, 'search.html', {"message":message}) 
+
+@login_required(login_url='/accounts/login/')
+def search_category(request): 
+
+    #search for  category in explore 
+    if 'category' in request.GET and request.GET["category"]:
+        search_term =request.GET.get("category")
+        search_category = Question.search_category(search_term)
+        message = f"{search_term}"
+
+        return render(request,'search.html',{"message":message, "searched":search_category})
+
+    else:
+
+        message = "You haven't searched for any term"
+        return render(request, 'search.html', {"message":message}) 
+
+
+
+
   

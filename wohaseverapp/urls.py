@@ -7,6 +7,8 @@ from . import views
 urlpatterns=[
     url('^$',views.home,name = 'home'),
     url(r'^signup/$', core_views.signup, name='signup'),
+    url(r'^question/', views.search_results,name='question'),
+    url(r'^category/', views.search_category,name='category'),
 ]
 
 # if settings.DEBUG:

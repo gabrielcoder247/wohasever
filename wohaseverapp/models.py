@@ -71,7 +71,7 @@ class Profile(models.Model):
 
 
 class Question(models.Model):
-    title = models.CharField(max_length=100)
+    question_title = models.CharField(max_length=100)
     your_question = models.TextField(max_length=300)
     pub_date = models.DateField(auto_now_add=False)
     image_path = models.ImageField(upload_to = 'images/')
