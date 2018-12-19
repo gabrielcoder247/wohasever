@@ -140,6 +140,23 @@ def explore(request,id):
 
 
 
+@login_required(login_url='/accounts/login/')
+def profile(request, profile_id):
+	
+	current_profile = Profile.objects.get(id=profile_id)
+	explore = Explore.objects.filter(profile=current_profile)
+	follows=Profile.objects.get(id=request.user.id)
+	is_follow =False
+	if follows.following.filter(id=profile_id).exists():
+		is_follow=True	
+	following=follows.following.all()
+	followers=follows.user.followed_by.all()
+
+	return render(request, 'profile/profile.html', {"current_profile":current_profile,"images":images, "follows":follows, "is_follow":is_follow, "following":following, "followers":followers})
+
+
+
+
 
 
 

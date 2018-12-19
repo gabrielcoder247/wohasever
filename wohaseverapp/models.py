@@ -146,6 +146,11 @@ class Explore(models.Model):
     search_category = models.CharField(max_length=50,null=True)
     created = models.DateField(auto_now_add=True)
 
+    class meta:
+        ordering = ['-pub_date'] 
+
+
+
 
     def get_category(self,id):
         category= Explore.objects.filter(category_id=id)
@@ -162,6 +167,7 @@ class Explore(models.Model):
 
     def __str__(self):
         return self.category
+
 
 
 
