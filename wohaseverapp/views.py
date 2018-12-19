@@ -59,12 +59,6 @@ def home(request):
             question_form = QuestionForm(prefix='questioned')
             answer_form = AnswerForm('answered')
             
-
-       
-
-
-    
-
     # if request.method == 'POST':
     #     question_form = QuestionForm(request.POST,request.FILES,instance=request.user)
     #     answer_form = AnswerForm(request.POST,request.FILES,instance=request.user)
