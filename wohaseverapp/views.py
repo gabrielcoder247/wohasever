@@ -37,6 +37,7 @@ def signup(request):
         return render(request, 'signup.html', {"form":form})
 
 
+@login_required(login_url='/accounts/login/')
 def home(request):
     title = "Home"
 
@@ -114,6 +115,31 @@ def search_category(request):
 
         message = "You haven't searched for any term"
         return render(request, 'search.html', {"message":message}) 
+
+@login_required(login_url='/accounts/login/')
+def explore(request,id):
+    category = Explore.get_category(category_id =id)
+
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            category = form.save()
+            category.save()
+            messages.success(request, ('You have created a category of your interest' ))
+            return redirect('home')
+            
+    else:
+        
+        # messages.error(request, ('You have have not successfully signed up' )
+        form = CategoryForm()
+
+
+
+
+    return render(request, 'explore.html', {"category":category, "form":form})
+
+
+
 
 
 

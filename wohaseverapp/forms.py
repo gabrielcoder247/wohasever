@@ -37,10 +37,10 @@ class AnswerForm(forms.ModelForm):
         exclude = ['user','profile']
 
 
-# class NewBusinessForm(forms.ModelForm):
-#     class Meta:
-#         model = Business
-#         exclude = ['user','profile']        
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Explore
+        exclude = ['user','profile']        
         
 
 # class CommentForm(forms.ModelForm):

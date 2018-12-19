@@ -142,6 +142,7 @@ class Explore(models.Model):
     # image=models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments')
     profile=models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='profile')
     Category = models.CharField(max_length=50,null=True)
+    category_image = models.ImageField(upload_to = 'category_img/')
     search_category = models.CharField(max_length=50,null=True)
     created = models.DateField(auto_now_add=True)
 
@@ -161,6 +162,8 @@ class Explore(models.Model):
 
     def __str__(self):
         return self.category
+
+
 
 class Likes(models.Model):
     user = models.OneToOneField(User,related_name='user_likes')
