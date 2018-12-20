@@ -48,20 +48,20 @@ class Profile(models.Model):
         profile = cls.objects.all()
         return profile
 
-    def is_following(self, checkuser):
-        return checkuser in self.following.all()
+    # def is_following(self, checkuser):
+    #     return checkuser in self.following.all()
 
-    def get_number_of_followers(self):
-        if self.followers.count():
-            return self.followers.count()
-        else:
-            return 0
+    # def get_number_of_followers(self):
+    #     if self.followers.count():
+    #         return self.followers.count()
+    #     else:
+    #         return 0
 
-    def get_number_of_following(self):
-        if self.following.count():
-            return self.following.count()
-        else:
-            return 0
+    # def get_number_of_following(self):
+    #     if self.following.count():
+    #         return self.following.count()
+    #     else:
+    #         return 0
      
 
     def __str__(self):
@@ -183,6 +183,23 @@ class Followers(models.Model):
     user = models.OneToOneField(User,related_name='user_followers')
     follower = models.CharField(max_length=20, default="")
 
+    def get_number_of_followers(self):
+        if self.followers.count():
+            return self.followers.count()
+        else:
+            return 0
+
 class Followings(models.Model):
     user = models.OneToOneField(User,related_name='user_followings')
-    following = models.CharField(max_length=20, default="")    
+    following = models.CharField(max_length=20, default="")  
+
+    def is_following(self, checkuser):
+        return checkuser in self.following.all()
+
+
+    def get_number_of_following(self):
+        if self.following.count():
+            return self.following.count()
+        else:
+            return 0
+       

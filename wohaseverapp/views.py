@@ -37,13 +37,13 @@ def signup(request):
         return render(request, 'signup.html', {"form":form})
 
 
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='/accounts/login/')
 def home(request):
     title = "Home"
 
     current_user = request.user
-    question = Question.objects.filter(user=request.user) 
-    answer = Answer.objects.filter(user=request.user)
+    question = Question.objects.filter() 
+    answer = Answer.objects.filter()
 
     if request.method == 'POST':
         if 'question' in request.POST:
@@ -123,7 +123,7 @@ def explore(request,id):
     if request.method == 'POST':
         form = CategoryForm(request.POST, request.FILES)
         if form.is_valid():
-            category = form.save()
+            category = form.save(commit=False)
             category.save()
             messages.success(request, ('You have created a category of your interest' ))
             return redirect('home')
@@ -145,14 +145,14 @@ def profile(request, profile_id):
 	
 	current_profile = Profile.objects.get(id=profile_id)
 	explore = Explore.objects.filter(profile=current_profile)
-	follows=Profile.objects.get(id=request.user.id)
-	is_follow =False
-	if follows.following.filter(id=profile_id).exists():
-		is_follow=True	
-	following=follows.following.all()
-	followers=follows.user.followed_by.all()
+	# follows=Profile.objects.get(id=request.user.id)
+	# is_follow =False
+	# if follows.following.filter(id=profile_id).exists():
+	# 	is_follow=True	
+	# following=follows.following.all()
+	# followers=follows.user.followed_by.all()
 
-	return render(request, 'profile/profile.html', {"current_profile":current_profile,"images":images, "follows":follows, "is_follow":is_follow, "following":following, "followers":followers})
+	return render(request, 'profile/profile.html', {"current_profile":current_profile,"explore":explore})
 
 
 
