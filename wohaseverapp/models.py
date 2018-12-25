@@ -11,15 +11,15 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, related_name="profile")
     photo = models.ImageField(upload_to = 'profile/') 
     bio = models.TextField(max_length=255) 
-    followers = models.ManyToManyField(User, related_name="followers", blank=True)
-    following = models.ManyToManyField(User, related_name="followed_by", blank=True)
+    # followers = models.ManyToManyField(User, related_name="followers", blank=True)
+    # following = models.ManyToManyField(User, related_name="followed_by", blank=True)
 
 
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
+    # def create_user_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         Profile.objects.create(user=instance)
 
-    post_save.connect(create_user_profile, sender=User)
+    # post_save.connect(create_user_profile, sender=User)
 
 
     
@@ -77,6 +77,7 @@ class Question(models.Model):
     image_path = models.ImageField(upload_to = 'images/')
     user = models.ForeignKey(User, related_name='user_question', blank=True)
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
+   
   
 
 
@@ -95,7 +96,7 @@ class Question(models.Model):
         
     @classmethod
     def search_question(cls, search_term):
-        question = cls.objects.filter(title__icontains = search_term)
+        question = cls.objects.filter(question_title__icontains = search_term)
         return question
                 
         
@@ -106,7 +107,7 @@ class Question(models.Model):
 
 
     def __str__(self):
-        return self.title
+        return self.question_title
 
 
 class Answer(models.Model):
@@ -115,9 +116,10 @@ class Answer(models.Model):
     # image=models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments')
     profile=models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='answer')
     your_answer = models.TextField(max_length=300,null=True)
+    question = models.ForeignKey('Question', on_delete=models.CASCADE)
 
 
-    def get_Answer(self,id):
+    def get_answer(self,id):
         answer= Answer.objects.filter(answer_id=id)
         return answer
         
@@ -171,15 +173,15 @@ class Explore(models.Model):
 
 
 
-class Likes(models.Model):
+class Like(models.Model):
     user = models.OneToOneField(User,related_name='user_likes')
     likes = models.IntegerField()
 
-class Disikes(models.Model):
+class Disike(models.Model):
     user = models.OneToOneField(User,related_name='user_dislikes')
     dislikes = models.IntegerField()    
 
-class Followers(models.Model):
+class Follower(models.Model):
     user = models.OneToOneField(User,related_name='user_followers')
     follower = models.CharField(max_length=20, default="")
 
@@ -189,7 +191,7 @@ class Followers(models.Model):
         else:
             return 0
 
-class Followings(models.Model):
+class Following(models.Model):
     user = models.OneToOneField(User,related_name='user_followings')
     following = models.CharField(max_length=20, default="")  
 

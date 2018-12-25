@@ -9,6 +9,7 @@ urlpatterns=[
     url(r'^signup/$', core_views.signup, name='signup'),
     url(r'^question/', views.search_results,name='question'),
     url(r'^category/', views.search_category,name='category'),
+    url(r'^search/', views.search_results,name='search_results'),
 ]
 
 if settings.DEBUG:

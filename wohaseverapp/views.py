@@ -49,13 +49,21 @@ def home(request):
         if 'question' in request.POST:
             question_form = QuestionForm(request.POST,request.FILES,instance=request.user, prefix='questioned')
             if question_form.is_valid:
-                question_form.save()
-            question_form = QuestionForm(prefix='questioned')
+                question_form = QuestionForm(prefix='questioned')
+                new_form = question_form.save()
+                new_form.user = current_user
+                new_form.save()
+ 
 
         elif 'answer' in request.POST:
             answer_form = AnswerForm(request.POST,request.FILES,instance=request.user, prefix='answered')
             if answer_form.is_valid:
                 answer_form.save()
+                answer_form = AnswerForm(prefix='answered')
+                new_a_form = question_form.save()
+                new_a_form.user = current_user
+                new_a_form.save()
+ 
 
     else:
             question_form = QuestionForm(prefix='questioned')
