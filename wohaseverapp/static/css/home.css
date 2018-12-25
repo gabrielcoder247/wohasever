@@ -1,0 +1,50 @@
+
+
+
+.search-form > .form-control {
+    display: block;
+    font-size:11px;
+    padding:4px 2px;
+    border:solid 1px #aacfe4;
+    width:70px;
+    margin:2px 0 20px 10px;
+}
+
+.search-forms {
+    width: 300px;
+    position: relative;
+    left:40%;
+}
+
+#filtersubmit {
+    position: relative;
+    z-index: 1;
+    left: -25px;
+    top: 1px;
+    color: #7B7B7B;
+    cursor: pointer;
+    display: inline;
+  }
+
+
+.input-group {
+   
+    border-radius: 5px; 
+    display:block;
+    height: 345px;
+    background-color: rgba(228, 241, 254, 1);
+    box-shadow: 2px 2px 2px 2px;
+    
+}
+
+h1 {
+    text-align: center;
+    
+}
+
+.profile-img .img-responsive {
+    border-radius: 50%;
+    width: 35%;
+    height: 35%;
+    position: relative;
+}

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'widget_tweaks',
+    'registration',
+    
     # 'simple_forms.apps.core',
 ]
 
@@ -135,3 +136,7 @@ STATICFILES_DIRS = [
 # media setting for file uploads
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+

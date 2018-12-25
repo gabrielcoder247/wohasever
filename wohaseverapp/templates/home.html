@@ -1,94 +1,67 @@
 {% extends 'base.html'%}
-{% load static%}
+{% load staticfiles %}
 {% load bootstrap4 %}
 {% block styles %}
   {{block.super}}
-  <link rel="stylesheet" href="{% static 'css/signup.css'%}">
+  <link rel="stylesheet" href="{% static 'css/home.css'%}">
 {% endblock %}
 
 {% block content %}
 <div class="container">
   <div class="row mt-4">
-    <!-- Empty div -->
+   
+        <div class="search-forms">
+              <form class="form inline" role="search" action="{% url 'search_results' %}">
+          <input type="text" class="fas fa-search form-control mb-2 " placeholder="Search for..." name="question_title">
+          
+         
+              <button class="btn btn-outline-success ml-5 my-2 my-sm-0" type="search">Search</button>
+         
+          <!-- <input id="filter" type="text" placeholder="Search" />
+<i id="filtersubmit" class="fa fa-search"></i> -->
 
-    <!-- <div class="col-xs-8 col-sm-8 col-md-10 col-lg-10" > -->
-        <div class="input-group">
-              <form class="search-form" role="search" action="{% url 'search_results' %}">
-          <input type="text" class="form-control" placeholder="Search for..." name="question_title">
-          <!-- <span class="input-group-btn"> -->
-              <button class="btn btn-outline-success my-2 my-sm-0" type="search">Search</button>
-          <!-- </span> -->
         </form>
-        </div><!-- /input-group -->
+        </div>
       </div>
       <div class="row mt-3">
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="border: 1px solid blue; border-radius: 5px; display:block">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <div class="input-group">
                         <div class="header-title">
                                 <h1>Question</h1>
                             </div>
                             
-                    <form class="navbar-form" role="question-form" action="">
+                    <form class="search-form" role="question-form" action="{% url 'home'%}">
                         <div class="title-input ">
                         <input type="text" class="form-control mt-4" placeholder="Title" name="title">
                     </div>
-
-                        
                         <div class="question-input mt-4">
-                      <input type="textfield" class="form-control mt-4" placeholder="Ask your questions here!" name="your_question">
+                      <textarea type="textfield" class="form-control mt-4" placeholder="Ask your questions here!" name="your_question"> </textarea>
                     </div>
                       <div class="input-group-btn">
-                        <button class="btn  btn-outline-success" type="button">Go!</button>
+                        <button class="btn  btn-outline-success" type="submit">Go!</button>
                       </div>
                     </form>
-                    </div><!-- /input-group -->
+                    </div>
 
           </div>
           <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                <!-- <div class="display-question"> -->
-                    <!-- <div class="col-md-8 comments">
-                        <h4> {{user.username}}
-                            
-                        </h4>
-                       
-                        <hr>
-                        
-                       
-                        <ul class="list-inline">
-                            
-                        </ul>
-                        <ul class="list-inline">
-                           
-                        </ul>
-                       
-                    </div> -->
-                    <!-- <div class="panel panel-default">
-                      <div class="panel-heading">Panel heading without title</div>
-                      <div class="panel-body">
-                        Panel content
-                      </div>
-                    </div> -->
-                    
+              {% for ans in answer %}     
                     <div class="panel panel-default">
                       <div class="panel-heading">
-                        <h3 class="panel-title">Panel title </h3>
+                        <h3 class="panel-title">{{user.username}} </h3>
                       </div>
                       <div class="panel-body">
-
-                        {% for ans in answer %}
-                        <div class="col-md-4 pd-5 profile_img">
+                        <div class="col-md-4 pd-5 profile-img">
                             <img class="img-responsive" src="{{ans.profile.photo.url}}" alt="">
                             <p>{{ans.title}}</p>
                             <p>{{ans.profile.bio}}</p>
                             <p>{{ans.question.your_question}}</p>
                         </div>
-                        {%endfor%}
+                       
                         
                       </div>
                     </div>
-  
-                <!-- </div> -->
-  
+                    {%endfor%}
             </div>
 
       </div>
