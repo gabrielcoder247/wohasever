@@ -11,16 +11,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, related_name="profile")
     photo = models.ImageField(upload_to = 'profile/') 
     bio = models.TextField(max_length=255) 
-    # followers = models.ManyToManyField(User, related_name="followers", blank=True)
-    # following = models.ManyToManyField(User, related_name="followed_by", blank=True)
-
-
-    # def create_user_profile(sender, instance, created, **kwargs):
-    #     if created:
-    #         Profile.objects.create(user=instance)
-
-    # post_save.connect(create_user_profile, sender=User)
-
+    
 
     
     def get_following(self):
@@ -66,7 +57,8 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
-
+        
+       
   
 
 

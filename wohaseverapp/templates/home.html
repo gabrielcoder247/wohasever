@@ -45,10 +45,11 @@
 
           </div>
           <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            
               {% for ans in answer %}     
                     <div class="panel panel-default">
                       <div class="panel-heading">
-                        <h3 class="panel-title">{{user.username}} </h3>
+                        <h3 class="panel-title">{{ans.user.username}} </h3>
                       </div>
                       <div class="panel-body">
                         <div class="col-md-4 pd-5 profile-img">
@@ -56,14 +57,18 @@
                             <p>{{ans.title}}</p>
                             <p>{{ans.profile.bio}}</p>
                             <p>{{ans.question.your_question}}</p>
+                            <p>{{ans.question.id}}</p>
                         </div>
                        
-                        
+                        <h4> <a href=" "class="waves-effect waves-light btn"><i class="material-icons left">arrow_forward</i>JOIN HOODWATCH</a></h4>
+
+                        <h4 class="truncate">This is an extremely long title that will be truncated</h4>
+                        <div class="card-panel hoverable"> Hoverable Card Panel</div>
                       </div>
                     </div>
                     {%endfor%}
             </div>
-
+             
       </div>
    </div>
 </div>
